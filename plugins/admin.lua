@@ -138,40 +138,40 @@ local function run(msg,matches)
     	send_large_msg("user#id"..matches[2],matches[3])
     	return "Msg sent"
     end
-    if matches[1] == "block" then
+    if matches[1] == "مسدود" then
     	if is_admin2(matches[2]) then
-    		return "You can't block admins"
+    		return "شما نمیتوانید مدیران را مسدود کنید"
     	end
     	block_user("user#id"..matches[2],ok_cb,false)
-    	return "User blocked"
+    	return "کاربر مسدود شد"
     end
-    if matches[1] == "unblock" then
+    if matches[1] == "آزاد" then
     	unblock_user("user#id"..matches[2],ok_cb,false)
-    	return "User unblocked"
+    	return "کاربر از لیست انسداد حذف شد"
     end
-    if matches[1] == "import" then--join by group link
+    if matches[1] == "ورود" then--join by group link
     	local hash = parsed_url(matches[2])
     	import_chat_link(hash,ok_cb,false)
     end
-    if matches[1] == "contactlist" then
+    if matches[1] == "لیست مخاطب" then
       get_contact_list(get_contact_list_callback, {target = msg.from.id})
-      return "I've sent contact list with both json and text format to your private"
+      return "لیست مخاطبین را با هردو فرمت (تکس و جیسون )به پی وی شما فرستادم"
     end
-    if matches[1] == "addcontact" and matches[2] then    add_contact(matches[2],matches[3],matches[4],ok_cb,false)
-      return "Number "..matches[2].." add from contact list"
+    if matches[1] == "افزودن مخاطب" and matches[2] then    add_contact(matches[2],matches[3],matches[4],ok_cb,false)
+      return "شماره "..matches[2].." به لیست مخاطبان اضافه شد"
     end
-    if matches[1] == "delcontact" then
+    if matches[1] == "حذف مخاطب" then
       del_contact("user#id"..matches[2],ok_cb,false)
-      return "User "..matches[2].." removed from contact list"
+      return "کاربر "..matches[2].." از لیست مخاطبان حذف شد"
     end
-    if matches[1] == "dialoglist" then
+    if matches[1] == "لیست گفتگو" then
       get_dialog_list(get_dialog_list_callback, {target = msg.from.id})
-      return "I've sent dialog list with both json and text format to your private"
+      return "لیست گفتگو را با هر دو فرمت (تکس و جیسون ) به پی وی شما فرستادم"
     end
-    if matches[1] == "whois" then
+    if matches[1] == " من کیم" then
       user_info("user#id"..matches[2],user_info_callback,{msg=msg})
     end
-    if matches[1] == "sync_gbans" then
+    if matches[1] == "بن ها" then
     	if not is_sudo(msg) then-- Sudo only
     		return
     	end
@@ -181,7 +181,7 @@ local function run(msg,matches)
     	for k,v in pairs(jdat) do
   		redis:hset('user:'..v, 'print_name', k)
   		banall_user(v)
-      		print(k, v.." Globally banned")
+      		print(k, v.." بن جهانی شد")
     	end
     end
     return
