@@ -226,7 +226,7 @@ function create_config( )
     "leave_ban",
     "admin"
     },
-    sudo_users = {75321713,},--Sudo users
+    sudo_users = {75321713},
     disabled_channels = {},
     moderation = {data = 'data/moderation.json'},
     about_text = [[Teleseed v2 - Open Source
@@ -325,7 +325,7 @@ This command will send text to [group_id]
 ]],
     help_text = [[
 Commands list :
-
+@amiraciid
 !kick [username|id]
 You can also do it by reply
 
